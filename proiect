@@ -5,3 +5,4 @@ class Utilizator:
    def__init__(self,nume,email):
      self.nume= nume
      self._email = email
+     s.
