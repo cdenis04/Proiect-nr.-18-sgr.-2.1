@@ -3,5 +3,5 @@ import csv
 
 class Utilizator:
    def__init__(self,nume,email):
-     self.nume=nume
-     self
+     self.nume= nume
+     self._email = email
