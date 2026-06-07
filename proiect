@@ -51,5 +51,25 @@ class Imprumut:
         self.data_returnare = datetime.date.today()
         self.echipament.schimba_stare("Disponibil")
         print(f"> Echipamentul {self.echipament.nume} a fost returnat cu sucees de {self.utilizator.nume}.")
-        
 
+class Laborator:
+    def __init__(self, nume):
+        self.nume = nume
+        self.__echipamente = []
+        self.__imprumuturi = []
+
+    def adauga_echipament(self, echipament):
+        self.__echipamente.append(echipament)
+
+    def afiseaza_toate_echipamentele(self):
+        print(f"--- Echipamente Laborator: {self.nume} ---")
+        for e in self.__echipamente:
+            e.afiseaza_echipament()
+        print("-" * 40)
+
+    def cauta_echipament(self, keyword):
+        rezultate = [e for e in self.__echipamente if keyword.lower() in e.nume.lower()]
+        return rezultate
+
+    def sorteaza_echipamente(self):
+        self.__echipamente.sort(key=lambda x: x.nume))
