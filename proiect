@@ -19,3 +19,23 @@ class Profesor(Utilizator):
         super().__init__(nume, email)
         self.departament = departament
 
+class Echipament:
+    def __init__(self, nume, cod_inventar, stare="Disponibil"):
+        self.nume = nume
+        self.__cod_inventar = cod_inventar
+        self.stare = stare
+        self._data_ultima_verificare = datetime.date.today()
+
+    def get_cod_inventar(self):
+        return self.__cod_inventar
+
+    def schimba_stare(self, noua_stare):
+        stari_permise = ["Disponibil", "Imprumutat", "Defect"]
+        if noua_stare in stari_permise:
+            self.stare = noua_stare
+        else:
+            raise ValueError(f"Starea '{noua_stare}' este invalida!")
+
+    def afiseaza_echipament(self):
+        print(f"Echipament: {self.nume} | Cod: {self.__cod_inventar} | Stare: {self.stare}")
+
