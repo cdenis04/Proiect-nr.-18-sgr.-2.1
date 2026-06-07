@@ -1,1 +1,5 @@
-import 
+import datetime
+import csv
+
+class Utilizator:
+   def__init__(self,nume,email):
