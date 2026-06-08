@@ -102,3 +102,4 @@ class Laborator:
         try:
             with open(fisier, mode='w', newline='', encoding='utf-8') as f:
 >>>>>>> fbdf2a759ae055b38b1a7404e982e8dfe0c68953
+Remus Corne
