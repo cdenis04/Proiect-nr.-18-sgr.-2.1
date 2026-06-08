@@ -1,1 +1,104 @@
+<<<<<<< HEAD
 import asj;baLHBC
+=======
+import datetime
+import csv
+
+class Utilizator:
+   def __init__(self,nume,email):
+     self.nume= nume
+     self._email = email
+
+   def afiseaza_informatii(self):
+        print(f"Utilizator: {self.nume} | Email: {self._email}")
+
+class Student(Utilizator):
+    def __init__(self, nume, email, grupa):
+        super().__init__(nume, email)
+        self.grupa = grupa
+
+class Profesor(Utilizator):
+    def __init__(self, nume, email, departament):
+        super().__init__(nume, email)
+        self.departament = departament
+
+class Echipament:
+    def __init__(self, nume, cod_inventar, stare="Disponibil"):
+        self.nume = nume
+        self.__cod_inventar = cod_inventar
+        self.stare = stare
+        self._data_ultima_verificare = datetime.date.today()
+
+    def get_cod_inventar(self):
+        return self.__cod_inventar
+
+    def schimba_stare(self, noua_stare):
+        stari_permise = ["Disponibil", "Imprumutat", "Defect"]
+        if noua_stare in stari_permise:
+            self.stare = noua_stare
+        else:
+            raise ValueError(f"Starea '{noua_stare}' este invalida!")
+
+    def afiseaza_echipament(self):
+        print(f"Echipament: {self.nume} | Cod: {self.__cod_inventar} | Stare: {self.stare}")
+
+
+class Imprumut:
+    def __init__(self, echipament, utilizator):
+        self.echipament = echipament
+        self.utilizator = utilizator
+        self.data_imprumut = datetime.date.today()
+        self.data_returnare = None
+
+    def returneaza_echipament(self):
+        self.data_returnare = datetime.date.today()
+        self.echipament.schimba_stare("Disponibil")
+        print(f"> Echipamentul {self.echipament.nume} a fost returnat cu sucees de {self.utilizator.nume}.")
+
+class Laborator:
+    def __init__(self, nume):
+        self.nume = nume
+        self.__echipamente = []
+        self.__imprumuturi = []
+
+    def adauga_echipament(self, echipament):
+        self.__echipamente.append(echipament)
+
+    def afiseaza_toate_echipamentele(self):
+        print(f"--- Echipamente Laborator: {self.nume} ---")
+        for e in self.__echipamente:
+            e.afiseaza_echipament()
+        print("-" * 40)
+
+    def cauta_echipament(self, keyword):
+        rezultate = [e for e in self.__echipamente if keyword.lower() in e.nume.lower()]
+        return rezultate
+
+    def sorteaza_echipamente(self):
+        self.__echipamente.sort(key=lambda x: x.nume))
+
+     def imprumuta_echipament(self, cod, utilizator):
+        try:
+        echipament = next(e for e in self.__echipamente if e.get_cod_inventar() == cod)
+
+            if echipament.stare == "Disponibil":
+                echipament.schimba_stare("Imprumutat")
+                noul_imprumut = Imprumut(echipament, utilizator)
+                self.__imprumuturi.append(noul_imprumut)
+                print(f"> Succes: '{echipament.nume}' a fost împrumutat de '{utilizator.nume}'.")
+                return noul_imprumut
+            else:
+                print(f"> Eroare: '{echipament.nume}' nu este disponibil. Stare curentă: {echipament.stare}.")
+
+        except StopIteration:
+            print(f"> Eroare: Nu a fost găsit niciun echipament cu codul '{cod}'.")
+        except ValueError as e:
+            print(f"> Eroare valoare: {e}")
+
+     def raport_defecte_csv(self):
+        fisier = f"raport_defecte_{datetime.date.today()}.csv"
+        echipamente_defecte = [e for e in self.__echipamente if e.stare == "Defect"]
+
+        try:
+            with open(fisier, mode='w', newline='', encoding='utf-8') as f:
+>>>>>>> fbdf2a759ae055b38b1a7404e982e8dfe0c68953
