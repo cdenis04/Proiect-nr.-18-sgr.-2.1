@@ -73,3 +73,28 @@ class Laborator:
 
     def sorteaza_echipamente(self):
         self.__echipamente.sort(key=lambda x: x.nume))
+
+     def imprumuta_echipament(self, cod, utilizator):
+        try:
+        echipament = next(e for e in self.__echipamente if e.get_cod_inventar() == cod)
+
+            if echipament.stare == "Disponibil":
+                echipament.schimba_stare("Imprumutat")
+                noul_imprumut = Imprumut(echipament, utilizator)
+                self.__imprumuturi.append(noul_imprumut)
+                print(f"> Succes: '{echipament.nume}' a fost împrumutat de '{utilizator.nume}'.")
+                return noul_imprumut
+            else:
+                print(f"> Eroare: '{echipament.nume}' nu este disponibil. Stare curentă: {echipament.stare}.")
+
+        except StopIteration:
+            print(f"> Eroare: Nu a fost găsit niciun echipament cu codul '{cod}'.")
+        except ValueError as e:
+            print(f"> Eroare valoare: {e}")
+
+     def raport_defecte_csv(self):
+        fisier = f"raport_defecte_{datetime.date.today()}.csv"
+        echipamente_defecte = [e for e in self.__echipamente if e.stare == "Defect"]
+
+        try:
+            with open(fisier, mode='w', newline='', encoding='utf-8') as f:
