@@ -130,7 +130,5 @@ lab.sorteaza_echipamente()
 print("\n-- Dupa sortare alfabetica --")
 lab.afiseaza_toate_echipamentele()
 
-
-
 >>>>>>> fbdf2a759ae055b38b1a7404e982e8dfe0c68953
 
