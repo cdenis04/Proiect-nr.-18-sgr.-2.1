@@ -101,4 +101,10 @@ class Laborator:
 
         try:
             with open(fisier, mode='w', newline='', encoding='utf-8') as f:
->>>>>>> fbdf2a759ae055b38b1a7404e982e8dfe0c68953
+                writer = csv.writer(f)
+                writer.writerow(["Nume Echipament", "Cod Inventar", "Data Mentenanta"])
+                for e in echipament_defecte:
+                    writer.writerow([e.nume, e.get_cod_inventar(), e._data_ultima_verificare])
+            print(f"\n[!] Raportul CSV pentru defecte a fost generat: {fisier}")
+        except IOError as e:
+            print(f"Eroare la scrierea fisierului: {e}")
