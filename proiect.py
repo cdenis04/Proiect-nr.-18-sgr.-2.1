@@ -1,23 +1,27 @@
 import datetime
 import csv
 
-class Utilizator:
-   def __init__(self,nume,email):
-     self.nume= nume
-     self._email = email
 
-   def afiseaza_informatii(self):
+class Utilizator:
+    def __init__(self, nume, email):
+        self.nume = nume
+        self._email = email
+
+    def afiseaza_informatii(self):
         print(f"Utilizator: {self.nume} | Email: {self._email}")
+
 
 class Student(Utilizator):
     def __init__(self, nume, email, grupa):
         super().__init__(nume, email)
         self.grupa = grupa
 
+
 class Profesor(Utilizator):
     def __init__(self, nume, email, departament):
         super().__init__(nume, email)
         self.departament = departament
+
 
 class Echipament:
     def __init__(self, nume, cod_inventar, stare="Disponibil"):
@@ -52,6 +56,7 @@ class Imprumut:
         self.echipament.schimba_stare("Disponibil")
         print(f"> Echipamentul {self.echipament.nume} a fost returnat cu sucees de {self.utilizator.nume}.")
 
+
 class Laborator:
     def __init__(self, nume):
         self.nume = nume
@@ -72,11 +77,11 @@ class Laborator:
         return rezultate
 
     def sorteaza_echipamente(self):
-        self.__echipamente.sort(key=lambda x: x.nume))
+        self.__echipamente.sort(key=lambda x: x.nume)
 
-     def imprumuta_echipament(self, cod, utilizator):
+    def imprumuta_echipament(self, cod, utilizator):
         try:
-        echipament = next(e for e in self.__echipamente if e.get_cod_inventar() == cod)
+            echipament = next(e for e in self.__echipamente if e.get_cod_inventar() == cod)
 
             if echipament.stare == "Disponibil":
                 echipament.schimba_stare("Imprumutat")
@@ -90,9 +95,9 @@ class Laborator:
         except StopIteration:
             print(f"> Eroare: Nu a fost găsit niciun echipament cu codul '{cod}'.")
         except ValueError as e:
-            print(f"> Eroare valoare: {e}")
+            print(f"> Eroare: {e}")
 
-     def raport_defecte_csv(self):
+    def raport_defecte_csv(self):
         fisier = f"raport_defecte_{datetime.date.today()}.csv"
         echipamente_defecte = [e for e in self.__echipamente if e.stare == "Defect"]
 
@@ -100,7 +105,7 @@ class Laborator:
             with open(fisier, mode='w', newline='', encoding='utf-8') as f:
                 writer = csv.writer(f)
                 writer.writerow(["Nume Echipament", "Cod Inventar", "Data Mentenanta"])
-                for e in echipament_defecte:
+                for e in echipamente_defecte:
                     writer.writerow([e.nume, e.get_cod_inventar(), e._data_ultima_verificare])
             print(f"\n[!] Raportul CSV pentru defecte a fost generat: {fisier}")
         except IOError as e:
