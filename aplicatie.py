@@ -28,3 +28,15 @@ class InterfataLaborator:
         for e in self.lab._Laborator__echipamente:
             text_afisat = f"{e.nume} | Cod: {e.get_cod_inventar()} | Stare: {e.stare}"
             self.lista_echipamente.insert(tk.END, text_afisat)
+
+    def apasa_imprumut(self):
+        cod_introdus = self.entry_cod.get()
+        utilizator_curent = Student(nume="Utilizator PC", email="user@upt.ro", grupa="2.1")
+        rezultat = self.lab.imprumuta_echipament(cod_introdus, utilizator_curent)
+
+        if rezultat:
+            messagebox.showinfo("Succes", f"Ai împrumutat echipamentul cu codul {cod_introdus}!")
+            self.entry_cod.delete(0, tk.END)
+            self.incarca_date()  
+        else:
+            messagebox.showwarning("Eroare", "Cod invalid sau echipament indisponibil. Verifică lista!")
