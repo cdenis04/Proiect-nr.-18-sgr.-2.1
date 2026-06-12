@@ -37,6 +37,15 @@ class InterfataLaborator:
         if rezultat:
             messagebox.showinfo("Succes", f"Ai împrumutat echipamentul cu codul {cod_introdus}!")
             self.entry_cod.delete(0, tk.END)
-            self.incarca_date()  
+            self.incarca_date()
         else:
             messagebox.showwarning("Eroare", "Cod invalid sau echipament indisponibil. Verifică lista!")
+
+if __name__ == "__main__":
+    lab = Laborator("Sisteme Electronice")
+    lab.adauga_echipament(Echipament(nume="Osciloscop Digital", cod_inventar="OSC-001"))
+    lab.adauga_echipament(Echipament(nume="Multimetru Fluke", cod_inventar="MULT-102"))
+    lab.adauga_echipament(Echipament(nume="Sursa Tensiune", cod_inventar="SUR-04", stare="Defect"))
+    fereastra = tk.Tk()
+    app = InterfataLaborator(fereastra, lab)
+    fereastra.mainloop()  
