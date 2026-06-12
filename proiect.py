@@ -103,6 +103,36 @@ class Laborator:
 
         try:
             with open(fisier, mode='w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(["Nume Echipament", "Cod inventar", "Data Mentenanta"])
+            for e in echipamente_defecte:
+                writer.writerow([e.nume, e.get_cod_inventar(), e._data_ultima_verificare])
+        print(f"\n[!] Raportul CSV pentru defecte a fost generat: {fisier}")
+     except IOError as e:
+        print(f"Eroare la scrierea fisierului: {e}")
+
+if __name__ == "__main__";
+student1 = Student(nume = "Corne Denis", email = "denis.corne@upt,ro", grupa "21")
+profesor1 = Profesor(nume = "Coptil Andrei", email = "andrei.coptil@upt.ro", departament = "Electronica")
+
+e1 = Echipament(nume = "Osciloscop Digital", cod_inventar = "OSC-001")
+e2 = Echipament(nume = "Multimetru Fluke", cod_inventar = "MULT-102")
+e3 = Echipament(nume = "Sursa Tensiune", cod_inventar = "ST-04", stare = "Defect")
+e4 = Echipament(nume = "Multimetru UNI", cod_inventar = "MULT-104")
+
+lab = Laborator("Sisteme Electronice")
+lab.adauga_echipament(e1)
+lab.adauga_echipament(e2)
+lab.adauga_echipament(e3)
+lab.adauga_echipament(e4)
+
+print("\n-- Inainte de sortare --")
+lab.afiseaza_toate_echipamentele()
+
+lab.sorteaza_echipamente()
+
+print("\n-- Dupa sortare alfabetica --")
+lab.afiseaza_toate_echipamentele()
                 writer = csv.writer(f)
                 writer.writerow(["Nume Echipament", "Cod Inventar", "Data Mentenanta"])
                 for e in echipamente_defecte:
