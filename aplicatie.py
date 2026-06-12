@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from proiect import Student, Echipament, Laborator
+from clase import Student, Echipament, Laborator
 
 
 class InterfataLaborator:
@@ -48,4 +48,4 @@ if __name__ == "__main__":
     lab.adauga_echipament(Echipament(nume="Sursa Tensiune", cod_inventar="SUR-04", stare="Defect"))
     fereastra = tk.Tk()
     app = InterfataLaborator(fereastra, lab)
-    fereastra.mainloop()  
+    fereastra.mainloop()

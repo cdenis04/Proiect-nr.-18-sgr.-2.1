@@ -1,6 +1,6 @@
-from proiect import Student, Profesor, Echipament, Laborator
+from clase import Student, Profesor, Echipament, Laborator
 if __name__ == "__main__":
-    student1 = Student(nume="Ciobanu Razvan", email="razvan.ciobanu@student.upt.ro", grupa="2.1")
+    student1 = Student(nume="Denis Razvan-Andrei", email="denis.razvan-andrei@student.upt.ro", grupa="2.1")
     profesor1 = Profesor(nume="Rares Nicolae", email="rares.nicolae@upt.ro", departament="Electronica")
 
     e1 = Echipament(nume="Osciloscop Digital", cod_inventar="OSC-001")
